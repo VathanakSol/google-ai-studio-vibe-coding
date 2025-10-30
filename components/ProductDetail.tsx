@@ -8,9 +8,11 @@ import QuantityControl from './QuantityControl';
 
 interface ProductDetailProps {
   onAddToCart: (product: Product, quantity: number) => void;
+  wishlistIds: string[]; // New prop for wishlist IDs
+  onToggleWishlist: (productId: string) => void; // New prop for toggling wishlist
 }
 
-const ProductDetail: React.FC<ProductDetailProps> = ({ onAddToCart }) => {
+const ProductDetail: React.FC<ProductDetailProps> = ({ onAddToCart, wishlistIds, onToggleWishlist }) => {
   const { productId } = useParams<{ productId: string }>();
   const navigate = useNavigate();
   const [product, setProduct] = useState<Product | null>(null);
@@ -23,6 +25,11 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ onAddToCart }) => {
   const [newReviewRating, setNewReviewRating] = useState<number>(0);
   const [newReviewComment, setNewReviewComment] = useState<string>('');
   const [reviewError, setReviewError] = useState<string | null>(null);
+
+  // Check if current product is wishlisted
+  const isWishlisted = useMemo(() => {
+    return product ? wishlistIds.includes(product.id) : false;
+  }, [product, wishlistIds]);
 
   // Load product data
   useEffect(() => {
@@ -172,6 +179,16 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ onAddToCart }) => {
             `}
           >
             {isOutOfStock ? 'Out of Stock' : `Add ${quantity} to Cart`}
+          </button>
+          <button
+            onClick={() => onToggleWishlist(product.id)}
+            className="flex items-center justify-center space-x-2 w-full py-3 px-6 rounded-lg text-lg font-semibold border-2 border-pink-500 text-pink-500 hover:bg-pink-50 hover:text-pink-600 transition-all duration-300 mt-4 focus:ring-4 focus:ring-pink-300"
+            aria-label={isWishlisted ? 'Remove from Wishlist' : 'Add to Wishlist'}
+          >
+            <svg className="w-6 h-6" fill={isWishlisted ? "currentColor" : "none"} stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+            <span>{isWishlisted ? 'Remove from Wishlist' : 'Add to Wishlist'}</span>
           </button>
         </div>
       </div>

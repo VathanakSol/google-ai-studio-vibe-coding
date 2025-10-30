@@ -124,7 +124,7 @@ export const MOCK_PRODUCTS: Product[] = [
     imageUrls: [
       'https://picsum.photos/600/400?random=25',
       'https://picsum.photos/600/400?random=26',
-      'httpsum.photos/600/400?random=27',
+      'https://picsum.photos/600/400?random=27',
     ],
     stock: 8
   },
@@ -150,4 +150,11 @@ export const ALL_CATEGORIES: Category[] = [
   Category.Apparel,
   Category.Books,
   Category.Home,
+];
+
+export const CAROUSEL_IMAGES: string[] = [
+  'https://picsum.photos/1200/600?random=31',
+  'https://picsum.photos/1200/600?random=32',
+  'https://picsum.photos/1200/600?random=33',
+  'https://picsum.photos/1200/600?random=34',
 ];

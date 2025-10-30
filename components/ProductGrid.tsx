@@ -6,13 +6,14 @@ import { Product } from '../types';
 interface ProductGridProps {
   products: Product[];
   onAddToCart: (product: Product, quantity: number) => void;
+  wishlistIds: string[]; // New prop for wishlist IDs
 }
 
-const ProductGrid: React.FC<ProductGridProps> = ({ products, onAddToCart }) => {
+const ProductGrid: React.FC<ProductGridProps> = ({ products, onAddToCart, wishlistIds }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4">
       {products.map((product) => (
-        <ProductCard key={product.id} product={product} onAddToCart={onAddToCart} />
+        <ProductCard key={product.id} product={product} onAddToCart={onAddToCart} wishlistIds={wishlistIds} />
       ))}
     </div>
   );

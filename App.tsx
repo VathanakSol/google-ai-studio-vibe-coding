@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -8,6 +7,7 @@ import CategoryFilter from './components/CategoryFilter';
 import ProductGrid from './components/ProductGrid';
 import ProductDetail from './components/ProductDetail';
 import Cart from './components/Cart';
+import Wishlist from './components/Wishlist'; // Import the new Wishlist component
 import { Product, CartItem, Category } from './types';
 import { MOCK_PRODUCTS } from './constants';
 
@@ -21,7 +21,17 @@ const App: React.FC = () => {
       return [];
     }
   });
+  const [wishlistIds, setWishlistIds] = useState<string[]>(() => {
+    try {
+      const storedWishlist = localStorage.getItem('wishlistIds');
+      return storedWishlist ? JSON.parse(storedWishlist) : [];
+    } catch (error) {
+      console.error("Failed to parse wishlist IDs from localStorage:", error);
+      return [];
+    }
+  });
   const [selectedCategory, setSelectedCategory] = useState<Category>(Category.All);
+  const [searchTerm, setSearchTerm] = useState<string>('');
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(MOCK_PRODUCTS);
 
   useEffect(() => {
@@ -29,12 +39,27 @@ const App: React.FC = () => {
   }, [cartItems]);
 
   useEffect(() => {
-    if (selectedCategory === Category.All) {
-      setFilteredProducts(MOCK_PRODUCTS);
-    } else {
-      setFilteredProducts(MOCK_PRODUCTS.filter((product) => product.category === selectedCategory));
+    localStorage.setItem('wishlistIds', JSON.stringify(wishlistIds));
+  }, [wishlistIds]);
+
+  useEffect(() => {
+    let productsToFilter = MOCK_PRODUCTS;
+
+    if (selectedCategory !== Category.All) {
+      productsToFilter = productsToFilter.filter((product) => product.category === selectedCategory);
     }
-  }, [selectedCategory]);
+
+    if (searchTerm.trim() !== '') {
+      const lowerCaseSearchTerm = searchTerm.toLowerCase();
+      productsToFilter = productsToFilter.filter((product) =>
+        product.name.toLowerCase().includes(lowerCaseSearchTerm) ||
+        product.description.toLowerCase().includes(lowerCaseSearchTerm) ||
+        product.longDescription.toLowerCase().includes(lowerCaseSearchTerm)
+      );
+    }
+
+    setFilteredProducts(productsToFilter);
+  }, [selectedCategory, searchTerm]); // Add searchTerm to dependencies
 
   const handleAddToCart = useCallback((product: Product, quantity: number) => {
     setCartItems((prevItems) => {
@@ -80,12 +105,33 @@ const App: React.FC = () => {
 
   const handleSelectCategory = useCallback((category: Category) => {
     setSelectedCategory(category);
+    setSearchTerm(''); // Clear search when category changes
   }, []);
+
+  const handleSearchChange = useCallback((term: string) => {
+    setSearchTerm(term);
+    setSelectedCategory(Category.All); // Clear category filter when search term changes
+  }, []);
+
+  const handleToggleWishlist = useCallback((productId: string) => {
+    setWishlistIds((prevIds) => {
+      if (prevIds.includes(productId)) {
+        return prevIds.filter((id) => id !== productId);
+      } else {
+        return [...prevIds, productId];
+      }
+    });
+  }, []);
+
 
   return (
     <Router>
       <div className="min-h-screen flex flex-col">
-        <Navbar cartItems={cartItems} />
+        <Navbar
+          cartItems={cartItems}
+          searchTerm={searchTerm}
+          onSearchChange={handleSearchChange}
+        />
         <main className="flex-grow">
           <Routes>
             <Route
@@ -99,14 +145,17 @@ const App: React.FC = () => {
                       onSelectCategory={handleSelectCategory}
                       selectedCategory={selectedCategory}
                     />
-                    <ProductGrid products={filteredProducts} onAddToCart={handleAddToCart} />
+                    {filteredProducts.length === 0 && (
+                      <p className="text-center text-xl text-gray-600 my-8">No products found matching your criteria.</p>
+                    )}
+                    <ProductGrid products={filteredProducts} onAddToCart={handleAddToCart} wishlistIds={wishlistIds} />
                   </div>
                 </>
               }
             />
             <Route
               path="/product/:productId"
-              element={<ProductDetail onAddToCart={handleAddToCart} />}
+              element={<ProductDetail onAddToCart={handleAddToCart} wishlistIds={wishlistIds} onToggleWishlist={handleToggleWishlist} />}
             />
             <Route
               path="/cart"
@@ -116,6 +165,17 @@ const App: React.FC = () => {
                   onUpdateQuantity={handleUpdateCartQuantity}
                   onRemoveItem={handleRemoveFromCart}
                   onCheckout={handleCheckout}
+                />
+              }
+            />
+            {/* New Wishlist Route */}
+            <Route
+              path="/wishlist"
+              element={
+                <Wishlist
+                  wishlistIds={wishlistIds}
+                  onAddToCart={handleAddToCart}
+                  onToggleWishlist={handleToggleWishlist}
                 />
               }
             />
