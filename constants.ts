@@ -10,9 +10,9 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 99.99,
     category: Category.Electronics,
     imageUrls: [
-      'https://picsum.photos/600/400?random=1',
-      'https://picsum.photos/600/400?random=2',
-      'https://picsum.photos/600/400?random=3',
+      'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&h=400&fit=crop',
     ],
     stock: 15
   },
@@ -24,9 +24,9 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 79.99,
     category: Category.Electronics,
     imageUrls: [
-      'https://picsum.photos/600/400?random=4',
-      'https://picsum.photos/600/400?random=5',
-      'https://picsum.photos/600/400?random=6',
+      'https://images.unsplash.com/photo-1576243345690-4e4b79b63288?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1589030343991-69ea1433b941?w=600&h=400&fit=crop',
     ],
     stock: 20
   },
@@ -38,9 +38,9 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 25.00,
     category: Category.Apparel,
     imageUrls: [
-      'https://picsum.photos/600/400?random=7',
-      'https://picsum.photos/600/400?random=8',
-      'https://picsum.photos/600/400?random=9',
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600&h=400&fit=crop',
     ],
     stock: 50
   },
@@ -52,9 +52,9 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 120.00,
     category: Category.Apparel,
     imageUrls: [
-      'https://picsum.photos/600/400?random=10',
-      'https://picsum.photos/600/400?random=11',
-      'https://picsum.photos/600/400?random=12',
+      'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=600&h=400&fit=crop',
     ],
     stock: 10
   },
@@ -66,9 +66,9 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 15.99,
     category: Category.Books,
     imageUrls: [
-      'https://picsum.photos/600/400?random=13',
-      'https://picsum.photos/600/400?random=14',
-      'https://picsum.photos/600/400?random=15',
+      'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1589998059171-988d887df646?w=600&h=400&fit=crop',
     ],
     stock: 30
   },
@@ -80,9 +80,9 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 29.99,
     category: Category.Electronics,
     imageUrls: [
-      'https://picsum.photos/600/400?random=16',
-      'https://picsum.photos/600/400?random=17',
-      'https://picsum.photos/600/400?random=18',
+      'https://images.unsplash.com/photo-1605464315542-bda3e2f4e605?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1615526675250-dbe5d4302ae0?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=600&h=400&fit=crop',
     ],
     stock: 25
   },
@@ -94,9 +94,9 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 35.00,
     category: Category.Home,
     imageUrls: [
-      'https://picsum.photos/600/400?random=19',
-      'https://picsum.photos/600/400?random=20',
-      'https://picsum.photos/600/400?random=21',
+      'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1481189778967-d3704873d34e?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1578096319707-ff6b2edf0757?w=600&h=400&fit=crop',
     ],
     stock: 40
   },
@@ -108,9 +108,9 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 55.00,
     category: Category.Home,
     imageUrls: [
-      'https://picsum.photos/600/400?random=22',
-      'https://picsum.photos/600/400?random=23',
-      'https://picsum.photos/600/400?random=24',
+      'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1621747569404-49888b101cac?w=600&h=400&fit=crop',
     ],
     stock: 12
   },
@@ -122,9 +122,9 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 85.00,
     category: Category.Apparel,
     imageUrls: [
-      'https://picsum.photos/600/400?random=25',
-      'https://picsum.photos/600/400?random=26',
-      'https://picsum.photos/600/400?random=27',
+      'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1509762774605-f07235a08f1f?w=600&h=400&fit=crop',
     ],
     stock: 8
   },
@@ -136,9 +136,9 @@ export const MOCK_PRODUCTS: Product[] = [
     price: 12.50,
     category: Category.Books,
     imageUrls: [
-      'https://picsum.photos/600/400?random=28',
-      'https://picsum.photos/600/400?random=29',
-      'https://picsum.photos/600/400?random=30',
+      'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&h=400&fit=crop',
     ],
     stock: 22
   },
@@ -153,8 +153,8 @@ export const ALL_CATEGORIES: Category[] = [
 ];
 
 export const CAROUSEL_IMAGES: string[] = [
-  'https://picsum.photos/1200/600?random=31',
-  'https://picsum.photos/1200/600?random=32',
-  'https://picsum.photos/1200/600?random=33',
-  'https://picsum.photos/1200/600?random=34',
+  'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=600&fit=crop',
+  'https://images.unsplash.com/photo-1491933382434-500287f9b54b?w=1200&h=600&fit=crop',
+  'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200&h=600&fit=crop',
+  'https://images.unsplash.com/photo-1560393464-5c69a73c5770?w=1200&h=600&fit=crop',
 ];

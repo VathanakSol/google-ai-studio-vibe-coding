@@ -13,12 +13,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, wishlis
   const isWishlisted = wishlistIds.includes(product.id);
 
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col group">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col group transform hover:-translate-y-1">
       <Link to={`/product/${product.id}`} className="block relative h-48 sm:h-56 overflow-hidden">
         <img
           src={product.imageUrls[0]}
           alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:rotate-1"
         />
         {product.stock === 0 && (
           <div className="absolute inset-0 bg-gray-900 bg-opacity-70 flex items-center justify-center text-white text-xl font-bold">
@@ -36,25 +36,29 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, wishlis
           </div>
         )}
       </Link>
-      <div className="p-4 flex flex-col flex-grow">
-        <h3 className="text-lg font-semibold mb-1 truncate">
-          <Link to={`/product/${product.id}`} className="hover:text-blue-600 transition-colors duration-200">
+      <div className="p-5 flex flex-col flex-grow">
+        <h3 className="text-lg font-semibold mb-2 truncate">
+          <Link to={`/product/${product.id}`} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
             {product.name}
           </Link>
         </h3>
-        <p className="text-gray-600 text-sm mb-3 line-clamp-2 flex-grow">
+        <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2 flex-grow">
           {product.description}
         </p>
-        <div className="flex justify-between items-center mt-auto pt-2">
-          <span className="text-xl font-bold text-gray-800">${product.price.toFixed(2)}</span>
+        <div className="flex justify-between items-center mt-auto pt-3 border-t border-gray-100 dark:border-gray-700">
+          <div className="flex flex-col">
+            <span className="text-sm text-gray-500 dark:text-gray-400">Price</span>
+            <span className="text-xl font-bold text-gray-800 dark:text-white">${product.price.toFixed(2)}</span>
+          </div>
           <button
             onClick={() => onAddToCart(product, 1)}
             disabled={product.stock === 0}
             className={`
-              bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium
+              bg-blue-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium
               hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
-              transition-colors duration-300
-              ${product.stock === 0 ? 'opacity-50 cursor-not-allowed' : ''}
+              transform hover:scale-105 active:scale-95
+              transition-all duration-200
+              ${product.stock === 0 ? 'opacity-50 cursor-not-allowed bg-gray-400 hover:bg-gray-400' : ''}
             `}
           >
             {product.stock === 0 ? 'Sold Out' : 'Add to Cart'}

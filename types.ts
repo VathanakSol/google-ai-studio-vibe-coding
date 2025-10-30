@@ -10,6 +10,31 @@ export interface Product {
   stock: number;
 }
 
+export interface User {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  avatar?: string;
+  phoneNumber?: string;
+  address?: {
+    street: string;
+    city: string;
+    state: string;
+    zipCode: string;
+    country: string;
+  };
+  orderHistory?: string[];
+  createdAt: string;
+}
+
+export interface AuthState {
+  isAuthenticated: boolean;
+  user: User | null;
+  loading: boolean;
+  error: string | null;
+}
+
 export enum Category {
   Electronics = 'Electronics',
   Apparel = 'Apparel',

@@ -11,6 +11,11 @@ import Wishlist from './components/Wishlist'; // Import the new Wishlist compone
 import { Product, CartItem, Category } from './types';
 import { MOCK_PRODUCTS } from './constants';
 
+import Login from './components/Login';
+import Register from './components/Register';
+import Profile from './components/Profile';
+import { AuthProvider } from './context/AuthContext';
+
 const App: React.FC = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     try {
@@ -126,12 +131,14 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      <div className="min-h-screen flex flex-col">
-        <Navbar
-          cartItems={cartItems}
-          searchTerm={searchTerm}
-          onSearchChange={handleSearchChange}
-        />
+      <AuthProvider>
+        <div className="min-h-screen flex flex-col">
+          <Navbar
+            cartItems={cartItems}
+            searchTerm={searchTerm}
+            onSearchChange={handleSearchChange}
+            wishlistIds={wishlistIds}
+          />
         <main className="flex-grow">
           <Routes>
             <Route
@@ -139,14 +146,28 @@ const App: React.FC = () => {
               element={
                 <>
                   <Hero />
-                  <div className="container mx-auto p-4 md:p-6 lg:p-8 mt-8">
-                    <h2 className="text-3xl font-bold text-gray-900 text-center mb-6">Our Products</h2>
+                  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                    <h2 className="text-4xl font-bold text-gray-900 dark:text-white text-center mb-8">
+                      Our Products
+                      <div className="h-1 w-24 bg-blue-600 mx-auto mt-4 rounded-full"></div>
+                    </h2>
                     <CategoryFilter
                       onSelectCategory={handleSelectCategory}
                       selectedCategory={selectedCategory}
                     />
                     {filteredProducts.length === 0 && (
-                      <p className="text-center text-xl text-gray-600 my-8">No products found matching your criteria.</p>
+                      <div className="text-center py-12">
+                        <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M12 20a8 8 0 100-16 8 8 0 000 16z" />
+                        </svg>
+                        <p className="mt-4 text-xl text-gray-600 dark:text-gray-400">No products found matching your criteria.</p>
+                        <button 
+                          onClick={() => { setSelectedCategory(Category.All); setSearchTerm(''); }}
+                          className="mt-4 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
+                        >
+                          Clear filters
+                        </button>
+                      </div>
                     )}
                     <ProductGrid products={filteredProducts} onAddToCart={handleAddToCart} wishlistIds={wishlistIds} />
                   </div>
@@ -179,10 +200,14 @@ const App: React.FC = () => {
                 />
               }
             />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </main>
         <Footer />
       </div>
+      </AuthProvider>
     </Router>
   );
 };
